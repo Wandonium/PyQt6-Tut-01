@@ -10,8 +10,8 @@ class EmptyWindow(QWidget):
 
     def initializeUI(self):
         """Set up the application"""
-        self.setGeometry(200, 100, 400, 300)
-        self.setWindowTitle("Empty Window in PyQt")
+        # self.setGeometry(600, 300, 800, 600)
+        # self.setWindowTitle("Empty Window in PyQt")
         self.show() # Display the window on the screen
 
 # Run the program
