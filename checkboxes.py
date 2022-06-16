@@ -27,6 +27,7 @@ class MainWindow(QWidget):
         morning_cb = QCheckBox("Morning [8AM - 2PM]", self)
         morning_cb.move(40, 60)
         #morning_cb.toggle() # Uncomment to start checked
+        morning_cb.toggled.connect(self.printSelected)
 
         after_cb = QCheckBox("Afternoon [1PM - 8PM]", self)
         after_cb.move(40, 80)
