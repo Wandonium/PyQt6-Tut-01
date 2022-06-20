@@ -47,7 +47,7 @@ class LoginWindow(QWidget):
         # Create QCheckBox for displaying password
         self.show_password_cb = QCheckBox("Show Password", self)
         self.show_password_cb.move(90, 110)
-        self.show_password_cb.toggled().connect(self.displayPasswordIfChecked)
+        self.show_password_cb.toggled.connect(self.displayPasswordIfChecked)
 
         # Create QPushButton for signing in
         login_button = QPushButton("Login", self)
@@ -60,7 +60,7 @@ class LoginWindow(QWidget):
         not_member_label.move(20, 186)
 
         sign_up_button = QPushButton("Sign Up", self)
-        sign_up_button.move(120, 180)
+        sign_up_button.move(130, 180)
         sign_up_button.clicked.connect(self.createNewUser)
 
     def clickLoginButton(self):
@@ -69,7 +69,7 @@ class LoginWindow(QWidget):
         close the program. If they don't, display a warning
         QMessageBox."""
         users = {} # Dictionary to store user info
-        file = "files/users.txt"
+        file = "../files/users.txt"
 
         try:
             with open(file, "r") as f:
@@ -157,7 +157,7 @@ class MainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.intializeUI()
+        self.initializeUI()
 
     def initializeUI(self):
         """Set up the application's GUI"""
@@ -167,7 +167,7 @@ class MainWindow(QWidget):
 
     def setUpMainWindow(self):
         """Create and arrange widgets in the main window."""
-        image = "images/background_kingfisher.jpg"
+        image = "../images/background_kingfisher.jpg"
 
         try:
             with open(image):
