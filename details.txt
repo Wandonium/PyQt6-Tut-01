@@ -1,1 +1,1 @@
-{"focus": "", "notes": "", "todo": []}
+{"focus": "Write the remaining 20 pages for Chapter 4\n- Work on the chapter from 7 - 12 AM", "notes": "Take a walk today and start planning for Mom's birthday", "todo": ["Have dinner with Mom", "Look up recipes for guacamole", "Call Jason"]}
