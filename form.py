@@ -98,6 +98,21 @@ class MainWindow(QWidget):
         # Set the layout for the main window
         self.setLayout(main_form)
 
+    def clearText(self, text):
+        """Clear the text for the QLabel that provides feedback."""
+        self.feedback_label.clear()
+
+    def checkFormInformation(self):
+        """Demonstrates a few cases for validating user input."""
+        if self.first_name_edit.text() == "" or \
+            self.last_name_edit.text() == "":
+            self.feedback_label.setText("[INFO] Missing names.")
+        elif self.phone_edit.hasAcceptableInput() == False:
+            self.feedback_label.setText(
+                "[INFO] Phone number entered incorrectly.")
+        elif self.email_edit.hasAcceptableInput() == False:
+            self.feedback_label.setText("[INFO] Email entered incorrectly.")
+
 
 # Run the program
 if __name__ == '__main__':
