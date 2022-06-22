@@ -53,6 +53,32 @@ class MainWindow(QWidget):
         pg2_container = QWidget()
         pg2_container.setLayout(pg2_form)
 
+        # Create the About page (Page 3)
+        pg3_form = QFormLayout()
+        pg3_form.setFieldGrowthPolicy(
+            pg3_form.FieldGrowthPolicy.AllNonFixedFieldsGrow
+        )
+        pg3_form.setFormAlignment(
+            Qt.AlignmentFlag.AlignHCenter |
+            Qt.AlignmentFlag.AlignTop
+        )
+        pg3_form.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        pg3_form.addRow(QLabel("Enter your cat's info."))
+        pg3_form.addRow("Name:", QLineEdit())
+        pg3_form.addRow("Color:", QLineEdit())
+
+        age_sb = QSpinBox()
+        age_sb.setRange(0, 30)
+        pg3_form.addRow("Age: ", age_sb)
+
+        weight_dsb = QDoubleSpinBox()
+        weight_dsb.setRange(0.0, 30.0)
+        pg3_form.addRow("Weight (kg):", weight_dsb)
+
+        pg3_container = QWidget()
+        pg3_container.setLayout(pg3_form)
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
