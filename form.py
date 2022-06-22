@@ -75,6 +75,29 @@ class MainWindow(QWidget):
         submit_h_box.addWidget(self.feedback_label)
         submit_h_box.addWidget(submit_button)
 
+        # Organize widgets and layouts in QFormLayout
+        main_form = QFormLayout()
+        main_form.setFieldGrowthPolicy(
+            main_form.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+        main_form.setFormAlignment(
+            Qt.AlignmentFlag.AlignHCenter |
+            Qt.AlignmentFlag.AlignTop
+        )
+        main_form.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        main_form.addRow(header_label)
+        main_form.addRow("Name", name_h_box)
+        main_form.addRow("Gender", gender_combo)
+        main_form.addRow("Date of Birth", self.birthdate_edit)
+        main_form.addRow("Phone", self.phone_edit)
+        main_form.addRow("Email", self.email_edit)
+        main_form.addRow(QLabel("Comments or Messages"))
+        main_form.addRow(extra_info_tedit)
+        main_form.addRow(submit_h_box)
+
+        # Set the layout for the main window
+        self.setLayout(main_form)
+
 
 # Run the program
 if __name__ == '__main__':
