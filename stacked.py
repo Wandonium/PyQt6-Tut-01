@@ -79,6 +79,24 @@ class MainWindow(QWidget):
         pg3_container = QWidget()
         pg3_container.setLayout(pg3_form)
 
+        # Create the stacked layout and add pages
+        self.stacked_layout = QStackedLayout()
+        self.stacked_layout.addWidget(profile_image)
+        self.stacked_layout.addWidget(pg2_container)
+        self.stacked_layout.addWidget(pg3_container)
+
+        # Create the main layout
+        main_v_box = QVBoxLayout()
+        main_v_box.addWidget(page_combo)
+        main_v_box.addLayout(self.stacked_layout)
+
+        # Set the layout for the main window
+        self.setLayout(main_v_box)
+
+    def switchPage(self, index):
+        """Slot for switching between tabs."""
+        self.stacked_layout.setCurrentIndex(index)
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
