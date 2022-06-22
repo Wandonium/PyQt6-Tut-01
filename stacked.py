@@ -20,6 +20,19 @@ class MainWindow(QWidget):
         self.setUpMainWindow()
         self.show()
 
+    def setUpMainWindow(self):
+        """Create and arrange widgets in the main window."""
+        # Create and connect the combo box to switch pages
+        page_combo = QComboBox()
+        page_combo.addItems(["Image", "Description", "Additional Info"])
+        page_combo.activated.connect(self.switchPage)
+
+        # Create the Image page (Page 1)
+        profile_image = QLabel()
+        pixmap = QPixmap("images/norwegian.jpg")
+        profile_image.setPixmap(pixmap)
+        profile_image.setScaledContents(True)
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
