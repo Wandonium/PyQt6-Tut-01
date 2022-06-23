@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
 
     def createMenu(self):
         """Create the application's menu bar."""
-        self.menuBar().setNativeMenuBar(False)
+        # self.menuBar().setNativeMenuBar(False)
 
         # Create file menu and add actions
         file_menu = self.menuBar().addMenu("File")
