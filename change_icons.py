@@ -36,6 +36,16 @@ class MainWindow(QMainWindow):
         self.icon_button.setIconSize(QSize(60, 60))
         self.icon_button.clicked.connect(self.changeButtonIcon)
 
+        # Create vertical layout and add widgets
+        main_v_box = QVBoxLayout()
+        main_v_box.addWidget(info_label)
+        main_v_box.addWidget(self.icon_button)
+
+        # Set main layout of window
+        container = QWidget()
+        container.setLayout(main_v_box)
+        self.setCentralWidget(container)
+
     def changeButtonIcon(self):
         """When the button is clicked, change the icon to a different
         random icon from the image list."""
