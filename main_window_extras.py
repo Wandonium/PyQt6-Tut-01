@@ -25,22 +25,44 @@ class MainWindow(QMainWindow):
 
     def setUpMainWindow(self):
         """Create and arrange widgets in the main window."""
-        pass
+        # Craete and set the central widget
+        self.text_edit = QTextEdit()
+        self.setCentralWidget(self.text_edit)
+
+        # Create the status bar
+        self.setStatusBar(QStatusBar())
 
     def createActions(self):
         """Create the application's menu actions."""
         # Create actions for File menu
-        self.quit_act = QAction("&Quit")
+        self.quit_act = QAction(QIcon("images/exit.png"), "Quit")
         self.quit_act.setShortcut("Ctrl+Q")
+        self.quit_act.setStatusTip("Quit program")
         self.quit_act.triggered.connect(self.close)
+
+        # Create actions for View menu
+        self.full_screen_act = QAction("Full Screen", checkable=True)
+        self.full_screen_act.setStatusTip("Switch to full screen mode")
+        self.full_screen_act.triggered.connect(self.switchToFullScreen)
 
     def createMenu(self):
         """Create the application's menu bar."""
-        # self.menuBar().setNativeMenuBar(False)
+        self.menuBar().setNativeMenuBar(False)
 
         # Create file menu and add actions
         file_menu = self.menuBar().addMenu("File")
         file_menu.addAction(self.quit_act)
+
+        # Create View menu, Appearance submenu and add actions
+        view_menu = self.menuBar().addMenu("View")
+        appearance_submenu = view_menu.addMenu("Appearance")
+        appearance_submenu.addAction(self.full_screen_act)
+
+    def switchToFullScreen(self, state):
+        """If state is True, display the main window in full screen. Otherwise,
+        return the window to normal."""
+        if state: self.showFullScreen()
+        else: self.showNormal()
 
 # Run the program
 if __name__ == '__main__':
