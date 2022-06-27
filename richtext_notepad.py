@@ -90,11 +90,37 @@ class MainWindow(QMainWindow):
 
     def createMenu(self):
         """Create the application's menu bar."""
-        # self.menuBar().setNativeMenuBar(False)
+        self.menuBar().setNativeMenuBar(False)
 
         # Create file menu and add actions
         file_menu = self.menuBar().addMenu("File")
         file_menu.addAction(self.new_act)
+        file_menu.addSeparator()
+        file_menu.addAction(self.open_act)
+        file_menu.addAction(self.save_act)
+        file_menu.addSeparator()
+        file_menu.addAction(self.quit_act)
+
+        # Create Edit menu and add actions
+        edit_menu = self.menuBar().addMenu("Edit")
+        edit_menu.addAction(self.undo_act)
+        edit_menu.addAction(self.redo_act)
+        edit_menu.addSeparator()
+        edit_menu.addAction(self.cut_act)
+        edit_menu.addAction(self.copy_act)
+        edit_menu.addAction(self.paste_act)
+        edit_menu.addSeparator()
+        edit_menu.addAction(self.find_act)
+
+        #Create Tools menu and add actions
+        tool_menu = self.menuBar().addMenu("Tools")
+        tool_menu.addAction(self.font_act)
+        tool_menu.addAction(self.color_act)
+        tool_menu.addAction(self.highlight_act)
+
+        # Create Help menu and add actions
+        help_menu = self.menuBar().addMenu("Help")
+        help_menu.addAction(self.about_act)
 
 # Run the program
 if __name__ == '__main__':
