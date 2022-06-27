@@ -1,0 +1,5 @@
+mysql db password for thelaikipiantraveller = thetraveller
+mysql username for thelaikipiantraveller = wordpressuser
+mysql db name for thelaikipiantraveller = wordpress
+wordpress admin username = traveller
+wordpress admin password = password

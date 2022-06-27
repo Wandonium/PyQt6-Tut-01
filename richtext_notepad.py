@@ -159,11 +159,11 @@ class MainWindow(QMainWindow):
             "HTML Files (*.html);;Text Files (*.txt)"
         )
 
-        if file_name.endsWith(".txt"):
+        if file_name.endswith(".txt"):
             notepad_text = self.text_edit.toPlainText()
             with open(file_name, "w") as f:
                 f.write(notepad_text)
-        elif file_name.endsWith(".html"):
+        elif file_name.endswith(".html"):
             notepad_richtext = self.text_edit.toHtml()
             with open(file_name, "w") as f:
                 f.write(notepad_richtext)
