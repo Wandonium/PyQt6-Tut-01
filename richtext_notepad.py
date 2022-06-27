@@ -201,6 +201,37 @@ class MainWindow(QMainWindow):
         """Reset extra selections after editing text."""
         self.text_edit.setExtraSelections([])
 
+    def chooseFont(self):
+        """Select a font from the QFontDialog."""
+        current = self.text_edit.currentFont()
+
+        opt = QFontDialog.FontDialogOption.DontUseNativeDialog
+        font, ok = QFontDialog.getFont(current, self, options=opt)
+
+        if ok:
+            self.text_edit.setCurrentFont(font)
+
+    def chooseFontColor(self):
+        """Select a color from the QColorDialog."""
+        color = QColorDialog.getColor()
+        if color.isValid():
+            self.text_edit.setTextColor(color)
+
+    def chooseFontBackgroundColor(self):
+        """Select a color for text's background."""
+        color = QColorDialog.getColor()
+        if color.isValid():
+            self.text_edit.setTextBackgroundColor(color)
+
+    def aboutDialog(self):
+        """Display the About dialog."""
+        QMessageBox.about(
+            self,
+            "About Notepad",
+            """<p>Beginner's Practical Guide to PyQt</p>
+            <p>Project 5.1 - Notepad GUI</p>"""
+        )
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
