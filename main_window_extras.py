@@ -64,6 +64,46 @@ class MainWindow(QMainWindow):
         if state: self.showFullScreen()
         else: self.showNormal()
 
+    def createToolBar(self):
+        """Create the application's toolbar."""
+        toolbar = QToolBar("Main Toolbar")
+        toolbar.setIconSize(QSize(16, 16))
+        self.addToolBar(toolbar)
+
+        # Add actions to the toolbar
+        toolbar.addAction(self.quit_act)
+
+    def createDockWidget(self):
+        """Create the application's dock widget."""
+        dock_widget = QDockWidget()
+        dock_widget.setWindowTitle("Formatting")
+        dock_widget.setAllowedAreas(Qt.DockWidgetArea.AllDockWidgetAreas)
+
+        # Create widget examples to add to the dock
+        auto_bullet_cb = QCheckBox("Auto Bullet List")
+        auto_bullet_cb.toggled.connect(self.changeTextEditSettings)
+
+        # Create layout for dock widget
+        dock_v_box = QVBoxLayout()
+        dock_v_box.addWidget(auto_bullet_cb)
+        dock_v_box.addStretch(1)
+
+        # Create a QWidget that acts as a container to hold other widgets
+        dock_container = QWidget()
+        dock_container.setLayout(dock_v_box)
+
+        # Set the main widget for the dock widget
+        dock_widget.setWidget(dock_container)
+        # Set initial location of dock widget in the main window
+        self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, dock_widget)
+
+    def changeTextEditSettings(self, checked):
+        """Change formatting features for QTextEdit."""
+        if checked:
+            self.text_edit.setAutoFormatting(QTextEdit.AutoFormattingFlag.AutoBulletList)
+        else:
+            self.text_edit.setAutoFormatting(QTextEdit.AutoFormattingFlag.AutoNone)
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
