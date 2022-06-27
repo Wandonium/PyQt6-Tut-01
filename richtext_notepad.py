@@ -150,6 +150,31 @@ class MainWindow(QMainWindow):
                 notepad_text = f.read()
             self.text_edit.setText(notepad_text)
 
+    def saveToFile(self):
+        """If the save button is clicked, display dialog asking user if they want to
+        save the text in the text edit field to a text or rich text file."""
+        file_name, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save File",
+            "HTML Files (*.html);;Text Files (*.txt)"
+        )
+
+        if file_name.endsWith(".txt"):
+            notepad_text = self.text_edit.toPlainText()
+            with open(file_name, "w") as f:
+                f.write(notepad_text)
+        elif file_name.endsWith(".html"):
+            notepad_richtext = self.text_edit.toHtml()
+            with open(file_name, "w") as f:
+                f.write(notepad_richtext)
+        else:
+            QMessageBox.information(
+                self,
+                "Not Saved",
+                "Text not saved.",
+                QMessageBox.StandardButton.Ok
+            )
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
