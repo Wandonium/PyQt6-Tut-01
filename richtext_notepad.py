@@ -175,6 +175,32 @@ class MainWindow(QMainWindow):
                 QMessageBox.StandardButton.Ok
             )
 
+    def searchText(self):
+        """Search for text."""
+        # Display input dialog to ask user for text to find
+        find_text, ok = QInputDialog.getText(self, "Search Text", "Find:")
+
+        if ok:
+            extra_selections = []
+            # Set the cursor to the beginning
+            self.text_edit.moveCursor(QTextCursor.MoveOperation.Start)
+            color = QColor(Qt.GlobalColor.gray)
+
+            while(self.text_edit.find(find_text)):
+                # Use ExtraSelection() to mark the text you are searching for as gray
+                selection = QTextEdit.ExtraSelection()
+                selection.format.setBackground(color)
+                # Set the cursor of the selection
+                selection.cursor = self.text_edit.textCursor()
+                extra_selections.append(selection)
+
+            # Highlight all selections in the QTextEdit widget
+            self.text_edit.setExtraSelections(extra_selections)
+
+    def removeHighlights(self):
+        """Reset extra selections after editing text."""
+        self.text_edit.setExtraSelections([])
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
