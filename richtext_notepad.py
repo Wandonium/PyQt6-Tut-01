@@ -46,6 +46,48 @@ class MainWindow(QMainWindow):
         self.quit_act.setShortcut("Ctrl+Q")
         self.quit_act.triggered.connect(self.close)
 
+        # Create actions for Edit menu
+        self.undo_act = QAction(QIcon("images/undo.png"), "Undo")
+        self.undo_act.setShortcut("Ctrl+Z")
+        self.undo_act.triggered.connect(self.text_edit.undo)
+
+        self.redo_act = QAction(QIcon("images/redo.png"), "Redo")
+        self.redo_act.setShortcut("Ctrl+Shift+Z")
+        self.redo_act.triggered.connect(self.text_edit.redo)
+
+        self.cut_act = QAction(QIcon("images/cut.png"), "Cut")
+        self.cut_act.setShortcut("Ctrl+X")
+        self.cut_act.triggered.connect(self.text_edit.cut)
+
+        self.copy_act = QAction(QIcon("images/copy.png"), "Copy")
+        self.copy_act.setShortcut("Ctrl+C")
+        self.copy_act.triggered.connect(self.text_edit.copy)
+
+        self.paste_act = QAction(QIcon("images/paste.png"), "Paste")
+        self.paste_act.setShortcut("Ctrl+V")
+        self.paste_act.triggered.connect(self.text_edit.paste)
+
+        self.find_act = QAction(QIcon("images/find.png"), "Find All")
+        self.find_act.setShortcut("Ctrl+F")
+        self.find_act.triggered.connect(self.searchText)
+
+        # Create actions for Tools menu
+        self.font_act = QAction(QIcon("images/font.png"), "Font")
+        self.font_act.setShortcut("Ctrl+T")
+        self.font_act.triggered.connect(self.chooseFont)
+
+        self.color_act = QAction(QIcon("images/color.png"), "Color")
+        self.color_act.setShortcut("Ctrl+Shift+C")
+        self.color_act.triggered.connect(self.chooseFontColor)
+
+        self.highlight_act = QAction(QIcon("images/highlight.png"), "Highlight")
+        self.highlight_act.setShortcut("Ctrl+Shift+H")
+        self.highlight_act.triggered.connect(self.chooseFontBackgroundColor)
+
+        # Create actions for Help menu
+        self.about_act = QAction("About")
+        self.about_act.triggered.connect(self.aboutDialog)
+
     def createMenu(self):
         """Create the application's menu bar."""
         # self.menuBar().setNativeMenuBar(False)
