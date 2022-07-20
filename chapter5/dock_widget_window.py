@@ -35,7 +35,7 @@ class MainWindow(QMainWindow):
     def createActions(self):
         """Create the application's menu actions."""
         # Create actions for File menu
-        self.quit_act = QAction(QIcon("images/exit.png"), "Quit")
+        self.quit_act = QAction(QIcon("../images/exit.png"), "Quit")
         self.quit_act.setShortcut("Ctrl+Q")
         self.quit_act.setStatusTip("Quit program")
         self.quit_act.triggered.connect(self.close)
