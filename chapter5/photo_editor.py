@@ -27,7 +27,14 @@ class MainWindow(QMainWindow):
 
     def setUpMainWindow(self):
         """Create and arrange widgets in the main window."""
-        pass
+        self.image = QPixmap()
+
+        self.image_label = QLabel()
+        self.image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setCentralWidget(self.image_label)
+
+        # Create the status bar
+        self.setStatusBar(QStatusBar())
 
     def createActions(self):
         """Create the application's menu actions."""
