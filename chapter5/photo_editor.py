@@ -296,6 +296,21 @@ class MainWindow(QMainWindow):
             self.image = QPixmap(flipped)
             self.image_label.repaint()
 
+    def resizeImageHalf(self):
+        """Resize the image to half its current size."""
+        if self.image.isNull() == False:
+            resize = QTransform().scale(0.5, 0.5)
+            pixmap = QPixmap(self.image)
+            resized = pixmap.transformed(resize)
+
+            self.image_label.setPixmap(resized.scaled(
+                self.image_label.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            ))
+            self.image = QPixmap(resized)
+            self.image_label.repaint()
+
 
 
 # Run the program
