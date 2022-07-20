@@ -266,6 +266,36 @@ class MainWindow(QMainWindow):
             self.image = QPixmap(rotated)
             self.image_label.repaint()  # Repaint the label
 
+    def flipImageHorizontal(self):
+        """Mirror the image across the horizontal axis."""
+        if self.image.isNull() == False:
+            flip_h = QTransform().scale(-1, 1)
+            pixmap = QPixmap(self.image)
+            flipped = pixmap.transformed(flip_h)
+
+            self.image_label.setPixmap(flipped.scaled(
+                self.image_label.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            ))
+            self.image = QPixmap(flipped)
+            self.image_label.repaint()
+
+    def flipImageVertical(self):
+        """Mirror the image across the vertical axis."""
+        if self.image.isNull() == False:
+            flip_v = QTransform().scale(1, -1)
+            pixmap = QPixmap(self.image)
+            flipped = pixmap.transformed(flip_v)
+
+            self.image_label.setPixmap(flipped.scaled(
+                self.image_label.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            ))
+            self.image = QPixmap(flipped)
+            self.image_label.repaint()
+
 
 
 # Run the program
