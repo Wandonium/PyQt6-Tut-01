@@ -115,6 +115,78 @@ class MainWindow(QMainWindow):
         view_menu = self.menuBar().addMenu("View")
         view_menu.addAction(self.toggle_dock_tools_act)
 
+    def createToolBar(self):
+        """Create the application's toolbar."""
+        tool_bar = QToolBar("Photo Editor Toolbar")
+        tool_bar.setIconSize(QSize(24,24))
+        self.addToolBar(tool_bar)
+
+        # Add actions to the toolbar
+        tool_bar.addAction(self.open_act)
+        tool_bar.addAction(self.save_act)
+        tool_bar.addAction(self.print_act)
+        tool_bar.addAction(self.clear_act)
+        tool_bar.addSeparator()
+        tool_bar.addAction(self.quit_act)
+
+    def createToolsDockWidget(self):
+        """Create the application's dock widget. Use View -> Edit Image Tools
+        menu to show/hide the dock."""
+        dock_widget = QDockWidget()
+        dock_widget.setWindowTitle("Edit Image Tools")
+        dock_widget.setAllowedAreas(
+            Qt.DockWidgetArea.LeftDockWidgetArea |
+            Qt.DockWidgetArea.RightDockWidgetArea
+        )
+
+        # Create buttons for editing images
+        self.rotate90 = QPushButton("Rotate 90°")
+        self.rotate90.setMinimumSize(QSize(130,40))
+        self.rotate90.setStatusTip("Rotate image 90° clockwise")
+        self.rotate90.clicked.connect(self.rotateImage90)
+
+        self.rotate180 = QPushButton("Rotate 180°")
+        self.rotate180.setMinimumSize(QSize(130,40))
+        self.rotate180.setStatusTip("Rotate image 180° clockwise")
+        self.rotate180.clicked.connect(self.rotateImage180)
+
+        self.flip_horizontal = QPushButton("Flip Horizontal")
+        self.flip_horizontal.setMinimumSize(QSize(130,40))
+        self.flip_horizontal.setStatusTip("Flip image across horizontal axis")
+        self.flip_horizontal.clicked.connect(self.flipImageHorizontal)
+
+        self.flip_vertical = QPushButton("Flip Vertical")
+        self.flip_vertical.setMinimumSize(QSize(130,40))
+        self.flip_vertical.setStatusTip("Flip image across vertical axis")
+        self.flip_vertical.clicked.connect(self.flipImageVertical)
+
+        self.resize_half = QPushButton("Resize Half")
+        self.resize_half.setMinimumSize(QSize(130,40))
+        self.resize_half.setStatusTip("Resize image to half the original size")
+        self.resize_half.clicked.connect(self.resizeImageHalf)
+
+        # Creat layout for dock widget
+        dock_v_box = QVBoxLayout()
+        dock_v_box.addWidget(self.rotate90)
+        dock_v_box.addWidget(self.rotate180)
+        dock_v_box.addStretch(1)
+        dock_v_box.addWidget(self.flip_horizontal)
+        dock_v_box.addWidget(self.flip_vertical)
+        dock_v_box.addStretch(1)
+        dock_v_box.addWidget(self.resize_half)
+        dock_v_box.addStretch(10)
+
+        # Create QWidget that acts as a container and set the layout for the dock
+        tools_container = QWidget()
+        tools_container.setLayout(dock_v_box)
+        dock_widget.setWidget(tools_container)
+
+        # Set initial location of dock widget
+        self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, dock_widget)
+
+        # Handle the visibility of the dock widget
+        self.toggle_dock_act = dock_widget.toggleViewAction()
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
