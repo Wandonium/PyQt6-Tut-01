@@ -225,6 +225,49 @@ class MainWindow(QMainWindow):
             QMessageBox.information(self, "Not Saved", "Image not saved.",
                                     QMessageBox.StandardButton.Ok)
 
+    def clearImage(self):
+        """Clear current image in the QLabel widget."""
+        self.image_label.clear()
+        self.image = QPixmap()  # Reseet pixmap
+        self.print_act.setEnabled(False)
+
+    def rotateImage90(self):
+        """Rotate image 90° clockwise."""
+        if self.image.isNull() == False:
+            transform90 = QTransform().rotate(90)
+            pixmap = QPixmap(self.image)
+            mode = Qt.TransformationMode.SmoothTransformation
+            rotated = pixmap.transformed(transform90, mode=mode)
+
+            self.image_label.setPixmap(rotated.scaled(
+                self.image_label.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            ))
+            self.image = QPixmap(rotated)
+            self.image_label.repaint()  # Repaint the label
+
+    def rotateImage180(self):
+        """Rotate image 180° clockwise."""
+        if self.image.isNull() == False:
+            transform180 = QTransform().rotate(180)
+            pixmap = QPixmap(self.image)
+            mode = Qt.TransformationMode.SmoothTransformation
+            rotated = pixmap.transformed(transform180, mode=mode)
+
+            self.image_label.setPixmap(rotated.scaled(
+                self.image_label.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            ))
+
+            # In order to keep from being allowed to rotate the image
+            # set the rotated image as self.image
+            self.image = QPixmap(rotated)
+            self.image_label.repaint()  # Repaint the label
+
+
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
