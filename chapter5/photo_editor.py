@@ -187,6 +187,44 @@ class MainWindow(QMainWindow):
         # Handle the visibility of the dock widget
         self.toggle_dock_act = dock_widget.toggleViewAction()
 
+    def openImage(self):
+        """Open an image file and display its contents on the QLabel widget."""
+        image_file, _ = QFileDialog.getOpenFileName(
+            self,
+            "Open Image",
+            "",
+            "JPG Files (*.jpeg *.jpg);;PNG Files (*.png);;\
+            Bitmap Files (*.bmp);;GIF Files (*.gif)"
+        )
+
+        if image_file:
+            self.image = QPixmap(image_file)
+            self.image_label.setPixmap(self.image.scaled(
+                self.image_label.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            ))
+        else:
+            QMessageBox.information(self, "No Image", "No Image Selected.",
+                                    QMessageBox.StandardButton.Ok)
+        self.print_act.setEnabled(True)
+
+    def saveImage(self):
+        """Display QFileDialog to select image location and save the image."""
+        image_file, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save Image",
+            "",
+            "JPG Files (*.jpeg *.jpg);;PNG Files (*.png);;\
+            Bitmap Files (*.bmp);;GIF Files (*.gif)"
+        )
+
+        if image_file and self.image.isNull() == False:
+            self.image.save(image_file)
+        else:
+            QMessageBox.information(self, "Not Saved", "Image not saved.",
+                                    QMessageBox.StandardButton.Ok)
+
 # Run the program
 if __name__ == '__main__':
     app = QApplication(sys.argv)
